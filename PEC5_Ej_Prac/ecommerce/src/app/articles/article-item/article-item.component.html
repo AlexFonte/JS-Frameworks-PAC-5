@@ -1,0 +1,16 @@
+<div [class]="article.isOnSale ? 'article-item sale' : 'article-item '">
+  <div class="image">
+    <img [src]="article.imageUrl" alt="foto d'aigua"/>
+  </div>
+  <div class="details mt-2 d-flex flex-column justify-content-between">
+    <div>{{ article.name }}</div>
+
+    <div class="py-2" [ngClass]="stockClasses">{{ article.price }} €</div>
+
+    <div *ngIf="article.isOnSale" class="d-flex justify-content-evenly align-items-center">
+      <button class="btn btn-primary btn-sm" [disabled]="article.quantityInCart == 0" (click)="removeInCart()"> - </button>
+      <span>{{ article.quantityInCart }}</span>
+      <button class="btn btn-primary btn-sm" (click)="addInCart()">+</button>
+    </div>
+  </div>
+</div>

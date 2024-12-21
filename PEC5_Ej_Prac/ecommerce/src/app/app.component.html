@@ -1,0 +1,15 @@
+<main class="main">
+  <div class="content">
+    <h1 class="text-center">{{ title }}</h1>
+    <app-navbar (componentToShow)="showComponent($event)"></app-navbar>
+
+    <div class="mt-2">
+      <app-article-list class="m d-flex justify-content-evenly align-items-start" *ngIf="currentComponent === 'article-list'"></app-article-list>
+      <app-article-new-template *ngIf="currentComponent === 'article-new-template'"></app-article-new-template>
+      <app-article-new-reactive *ngIf="currentComponent === 'article-new-reactive'"></app-article-new-reactive> 
+    </div>
+    
+  </div>
+</main>
+
+<router-outlet/>
