@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   
   title = 'Ecommerce';
-  currentComponent: string = 'article-list'; // Componente inicial que se muestra
+  currentComponent: string = 'article-new-template'; // Componente inicial que se muestra
   
   constructor() {}
 
