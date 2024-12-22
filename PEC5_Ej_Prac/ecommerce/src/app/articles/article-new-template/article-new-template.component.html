@@ -27,8 +27,7 @@
             <div class="from-group article-imageUrl mb-3">
                 <label for="imageUrl">Url de la imatge</label>
                 <input type="text" name="imageUrl" placeholder="Url de la imagen" ngModel required
-                    #articleImageUrl="ngModel" class="form-control"
-                    pattern="^http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}\\/[^\s]*?$">
+                    #articleImageUrl="ngModel" class="form-control" pattern="^http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$"> 
                 <small class="text-danger"
                     *ngIf=" articleImageUrl.invalid && (articleImageUrl.dirty || articleImageUrl.touched || invalidForm) ">
                     Url obligatoria
