@@ -1,1 +1,50 @@
-<p>article-new-reactive works!</p>
+<div class="container mt-4">
+    <h2>Formulari Reactiu per afegir un nou article</h2>
+
+    <form [formGroup]="articleForm" (ngSubmit)="createArticle()" class="col-md-3">
+        <div>
+            <div class="from-group article-name mb-3">
+                <label for="name">Nom del article</label>
+                <input type="text" name="name" placeholder="Nombre del articulo" class="form-control"
+                    formControlName="name" />
+                
+               <small class="text-danger"
+                    *ngIf=" name.invalid && (name.dirty || name.touched || invalidForm) && name.hasError('required')">
+                    Nom del article obligatori
+                </small>
+                <small class="text-danger" *ngIf="name.invalid && (name.dirty || name.touched || invalidForm) && name?.hasError('forbiddenName')">
+                    Aquest nom no està permès.
+                  </small>
+            </div>
+
+            <div class="from-group article-price mb-3">
+                <label for="price">Preu del article</label>
+                <input type="number" name="price" placeholder="Nombre del articulo" class="form-control"
+                    formControlName="price" step="0.1" min="0" />
+                <small class="text-danger" *ngIf=" price.invalid && (price.dirty || price.touched || invalidForm) ">
+                    Preu obligatori
+                </small>
+            </div>
+
+            <div class="from-group article-imageUrl mb-3">
+                <label for="imageUrl">Url de la imatge</label>
+                <input type="text" name="imageUrl" placeholder="Url de la imagen" class="form-control"
+                    formControlName="imageUrl" />
+                <small class="text-danger"
+                    *ngIf=" imageUrl.invalid && (imageUrl.dirty || imageUrl.touched || invalidForm) ">
+                    Url obligatoria
+                </small>
+            </div>
+
+
+            <div class="from-group article-name mb-3">
+                <input type="checkbox" id="isOnSale" formControlName="isOnSale" class="form-check-input" />
+                <label for="isOnSale" class="form-check-label">Es vend?</label>
+
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Crear</button>
+
+    </form>
+</div>

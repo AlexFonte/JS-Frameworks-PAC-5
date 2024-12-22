@@ -1,45 +1,49 @@
-<h2>Formulario template para añadir un nuevo articulo </h2>
-
 <div class="container mt-4">
-    <form (ngSubmit)="createAritcle(articleForm)" #articleForm="ngForm" class="col-md-3">
+    <h2>Formulari template per afegir un nou article</h2>
+
+    <form (ngSubmit)="createArticle(articleForm)" #articleForm="ngForm" class="col-md-3">
         <div ngModelGroup="article">
 
             <div class="from-group article-name mb-3">
-                <label for="name">Nombre del articulo</label>
-                <input type="text" name="name" placeholder="Nombre del articulo" ngModel required
-                    #articleName="ngModel" class="form-control"> 
-                <small class="text-danger" *ngIf=" articleName.invalid && (articleName.dirty || articleName.touched || invalidForm) ">
-                    Nombre del articulo obligatorio
+                <label for="name">Nom del article</label>
+                <input type="text" name="name" placeholder="Nombre del articulo" ngModel required #articleName="ngModel"
+                    class="form-control">
+                <small class="text-danger"
+                    *ngIf=" articleName.invalid && (articleName.dirty || articleName.touched || invalidForm) ">
+                    Nom del article obligatori
                 </small>
             </div>
 
             <div class="from-group article-price mb-3">
-                <label for="price">Precio del articulo</label>
+                <label for="price">Preu del article</label>
                 <input type="number" name="price" placeholder="Nombre del articulo" ngModel required
-                    #articlePrice="ngModel" class="form-control" min="0"> 
-                    <small class="text-danger" *ngIf=" articlePrice.invalid && (articlePrice.dirty || articlePrice.touched || invalidForm) ">
-                    Precio obligatorio
+                    #articlePrice="ngModel" class="form-control" min="0">
+                <small class="text-danger"
+                    *ngIf=" articlePrice.invalid && (articlePrice.dirty || articlePrice.touched || invalidForm) ">
+                    Preu obligatori
                 </small>
             </div>
 
             <div class="from-group article-imageUrl mb-3">
-                <label for="imageUrl">Url de la imagen</label>
+                <label for="imageUrl">Url de la imatge</label>
                 <input type="text" name="imageUrl" placeholder="Url de la imagen" ngModel required
-                    #articleiIageUrl="ngModel" class="form-control"  pattern="^http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$"> 
-                    <small class="text-danger" *ngIf=" articleiIageUrl.invalid && (articleiIageUrl.dirty || articleiIageUrl.touched || invalidForm) ">
-                        Url obligatoria
+                    #articleImageUrl="ngModel" class="form-control"
+                    pattern="^http(s?)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}\\/[^\s]*?$">
+                <small class="text-danger"
+                    *ngIf=" articleImageUrl.invalid && (articleImageUrl.dirty || articleImageUrl.touched || invalidForm) ">
+                    Url obligatoria
                 </small>
             </div>
 
-    
+
             <div class="from-group article-name mb-3">
-                <input type="checkbox" name="isOnSale" class="form-check-input" ngModel> ¿Esta a la venta?
+                <input type="checkbox" id="isOnSale" name="isOnSale" class="form-check-input" ngModel />
+                <label for="isOnSale" class="form-check-label">Es vend?</label>
+
             </div>
 
         </div>
         <button type="submit" class="btn btn-primary mt-3">Crear</button>
-
-
 
     </form>
 </div>

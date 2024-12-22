@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Article } from '../../model/article';
 import { NgForm } from '@angular/forms';
 
@@ -9,16 +9,19 @@ import { NgForm } from '@angular/forms';
 })
 export class ArticleNewTemplateComponent {
 
-  public newArticle: Article;
   public invalidForm: boolean = false;
-  constructor() { }
 
-  createAritcle(articleForm: NgForm): void {
+  constructor() {
+  }
+
+  createArticle(articleForm: NgForm): void {
     if (articleForm.invalid) {
       this.invalidForm = true;
+      console.log("Article invalid", articleForm.value);
     } else {
-      this.newArticle = articleForm.value;
+      const newArticle: Article = articleForm.value;
       this.invalidForm = false;
+      console.log("Nou article", newArticle);
     }
   }
 }
