@@ -2,67 +2,43 @@
 
 ## a) Quines són les principals diferències entre formularis dirigits per plantilla i formularis reactius?
 
+Les principals diferències són que, mentre que els formularis dirigits per plantilla es configuren i validen principalment en el HTML, els formularis reactius gestionen aquestes tasques en **TypeScript**.
+
 ### Formularis dirigits per plantilles:
+- La logica del control radica mes en el HTML i no en el component.
 - Fàcil d’utilitzar.
 - Asíncrons.
-- Preferiblement aplicable a formularis senzills, sense grans complexitats.
-- Estructura similar a la d’Angular 1.
+- Preferiblement aplicable a formularis senzills.
 - Utilitza l’enllaç de dades bidireccional amb la sintaxi `[(NgModel)]`.
-- Proves unitàries complicades de realitzar.
-- El desenvolupament de la lògica es realitza principalment en la plantilla HTML.
 - Utilitza el mòdul `FormsModule`.
-- Model de dades desestructurat.
 
 ### Formularis reactius:
-- Més flexible, però requereix major experiència d’ús.
 - Síncrons.
-- Recomanable per a formularis més complexos.
-- No es realitza l’enllaç de les dades.
-- Proves unitàries més senzilles de realitzar.
-- El desenvolupament de la lògica es realitza principalment en la part del component.
+- Preferiblement aplicable a formularis més complexos.
+- Sense enllaç de les dades.
+- La logica de control radica en el componet i no en el HTML
 - Utilitza el mòdul `ReactiveFormsModule`.
-- Model de dades estructurat.
 
 ## b) Què són, per a què serveixen i com s’utilitzen les directives ngModel i ngModelChange?
 
-Les directives `ngModel` i `ngModelChange` proporcionen la possibilitat d’obtenir un enllaç entre un component i les dades del formulari de la seva respectiva plantilla. Aquest enllaç funciona en ambdós sentits, podent passar dades des de la vista cap al component i viceversa.
+Directiva `ngModel`:
+    Una directiva de angular que permet crear  la realcio bidireccional (**two-way binding**) entre una propietat i el element html del formulari. Normalment s'utlitza en formularis basat en plantilles HTML (**template-driven forms**) per poder mantenir sincronitzas els valors d'entrada d'usuario (inputs) amb les propietats del component. Es a dir seveix per vincular un element del DOM amb una propietat del component.  
 
-Per a poder aplicar aquesta directiva, primer de tot cal importar `FormsModule` en el mòdul de la nostra aplicació.
+Directiva `ngModelChange`:
+ un event **binding** associat a `ngModel` que es dispara quan el model canvia (per entrada d'usuari o modificació al component). Permet executar accions personalitzades en resposta a aquests canvis.
 
-Un cop importat i tenint en compte el següent `input` d’exemple:
-
-    <input type="text" name="wineName"></input>
-
-Per a poder crear l’enllaç **Vista → Component**, només cal afegir la directiva `ngModel`, entre claudàtors, a l'_input_ i indicar el camp del component que volem seguir, per exemple, `wine.name`.
-
-    <input type="text" [ngModel]="wine.name"></input>
-
-D’aquesta manera, es mostrarà el valor de la propietat `name` de l’objecte `wine`, dins l’input en carregar la pàgina.
-
-Per a crear l’enllaç en l’altre sentit, **Component → Vista**, s’utilitza la directiva `ngModelChange` entre parèntesis.
-
-    <input type="text" [ngModel]="wine.name" (ngModelChange)="wine.name = $event"></input>
-
-Amb aquest canvi, sempre que el valor de l'_input_ es modifiqui, s’assignarà automàticament a `wine.name` en el controlador.
-
-També hi ha una manera més senzilla de realitzar el _binding_, per als casos en què no és necessari realitzar una operació prèvia sobre el valor actualitzat de l’`input`. En aquestes situacions, es pot aplicar la sintaxi `[(ngModel)]`:
-
-    <input type="text" [(ngModel)]="wine.name"></input>
-
-Així, simplifiquem el codi sense canviar i obtenint el mateix resultat que l’exemple anterior.
 
 ### c) Què són, quins són i per a què serveixen els estats en els formularis dirigits per plantilles?
 
-Amb l’ús de la directiva `ngModel`, és possible fer un seguiment dels estats per als controls enllaçats. Angular afegeix de forma automàtica, una sèrie de classes CSS als controls per determinar el seu estat. Els estats aplicats són els següents:
-
-| Estats                           | Classe CSS si <br/> `true` | Classe CSS si <br/> `false` |
-|----------------------------------|:-------------------------:|:--------------------------:|
-| El control ha estat visitat      |        ng-touched         |       ng-untouched         |
-| El valor del control ha canviat  |         ng-dirty          |        ng-pristine         |
-| El valor del control és vàlid    |         ng-valid          |         ng-invalid         |
-
-Aquests estats són especialment útils durant el procés de validació dels formularis, on un ús habitual és la presentació de missatges d’error en els controls invàlids.
+Els estats en formularis dirigits per plantilles són propietats que indiquen l'estat actual de cada camp o grup de controls. Els principals són: 
+  - dirty: valor change
+  - valid 
+  - invalid 
+  - touched: com el focusin o focusout
+  
+Els estats ens perment de mostrar i retroalimentar el html per mostrar al usuari so les dades del formulari son correctes o no, apart  de poder des/habilitar botons segons si compleis les regles o validacions del formulari. 
 
 ### d) Quins avantatges aporten els FormGroup en la composició de formularis?
+En utilitzar FormGroup, ens ajuda a organitzar i gestionar millor els formularis complexos, agrupant així els controls de formularis. Tenint així validacions que ens permeten utilitzar `valid`, `dirty`, `invalid`, etc. A més a més, tot això ens facilita la gestió de formularis.
 
-En utilitzar FormGroup, s’obtenen les referències dels diferents controls que componen el formulari, agrupades en un únic objecte. Això és especialment útil per saber si un formulari és vàlid sense haver de verificar cadascun dels controls individualment. Un altre ús habitual seria l’opció de canviar el valor de tots els controls, per exemple, resetejant el valor de tots els camps del formulari al mateix temps.
+Tot això ens permet millorar la reutilització de codi, tenint així una millor escalabilitat i mantenibilitat, ja que es poden reutilitzar en diferents components i formularis.
